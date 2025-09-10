@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jan Ganatantra 2.0 - Our Nepal, Our Decision</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .language-switch {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .language-switch:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Emergency Notification Banner */
+        .emergency-notification {
+            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            position: fixed;
+            top: 70px;
+            width: 100%;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            border-bottom: 3px solid #dc2626;
+        }
+
+        .emergency-notification .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .emergency-icon {
+            font-size: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .emergency-text {
+            font-weight: 600;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .emergency-text strong {
+            font-weight: 800;
+            text-decoration: underline;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #dc2626 100%);
+            color: white;
+            padding: 200px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .hero-tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            background: white;
+            color: #dc2626;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        /* Principles Section */
+        .principles {
+            padding: 80px 0;
+            background: #f8fafc;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: #1e40af;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .principle-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .principle-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .principle-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .principle-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1e40af;
+        }
+
+        /* Manifesto Sections */
+        .manifesto-section {
+            padding: 60px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .manifesto-section:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .manifesto-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .section-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: #dc2626;
+            opacity: 0.3;
+        }
+
+        .manifesto-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1e40af;
+        }
+
+        .manifesto-section h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.5rem;
+            color: #dc2626;
+        }
+
+        .manifesto-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .manifesto-section li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .manifesto-section li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        /* Call to Action */
+        .final-cta {
+            background: linear-gradient(135deg, #1e40af 0%, #dc2626 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .final-cta p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .manifesto-content {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .section-number {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            .final-cta h2 {
+                font-size: 2rem;
+            }
+
+            .emergency-notification .container {
+                flex-direction: column;
+                gap: 10px;
+                padding: 0 15px;
+            }
+
+            .emergency-text {
+                font-size: 0.9rem;
+                text-align: center;
+            }
+
+            .hero {
+                padding: 220px 0 80px;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        .stagger-6 { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">Jan Ganatantra 2.0</a>
+            <ul class="nav-links">
+                <li><a href="#principles">Principles</a></li>
+                <li><a href="#democracy">Democracy</a></li>
+                <li><a href="#rights">Rights</a></li>
+                <li><a href="#economy">Economy</a></li>
+                <li><a href="#future">Future</a></li>
+                <li><a href="index.html" class="language-switch">नेपाली</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Emergency Notification Banner -->
+    <div class="emergency-notification">
+        <div class="container">
+            <div class="emergency-icon">⚠️</div>
+            <div class="emergency-text">
+                <strong>URGENT:</strong> We strongly denounce the anarchy and violence that occurred on September 9th. We call upon all security forces to remobilize immediately and restore order to ensure the safety and security of all citizens. Democracy cannot flourish in chaos—we demand swift action to protect our constitutional rights and maintain the rule of law.
+            </div>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="fade-in">Jan Ganatantra 2.0</h1>
+                <div class="hero-subtitle fade-in stagger-1">Deliberative-Direct Republic</div>
+                <div class="hero-tagline fade-in stagger-2">A Radical Blueprint for a Just, Free, and Capable Nepal</div>
+                <a href="#principles" class="cta-button fade-in stagger-3">Hamro Nepal, Hamro Nirnay</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="principles" id="principles">
+        <div class="container">
+            <h2 class="section-title">Core Principles</h2>
+            <div class="principles-grid">
+                <div class="principle-card fade-in stagger-1">
+                    <div class="principle-icon">⚖️</div>
+                    <h3>Freedom as Non-Domination</h3>
+                    <p>No person, caste, business, party, or foreign power may arbitrarily dominate another.</p>
+                </div>
+                <div class="principle-card fade-in stagger-2">
+                    <div class="principle-icon">🎯</div>
+                    <h3>Justice as Capabilities</h3>
+                    <p>Every policy judged by whether it expands Nepalis' real freedoms—health, education, livelihood, connectivity, dignity.</p>
+                </div>
+                <div class="principle-card fade-in stagger-3">
+                    <div class="principle-icon">🏛️</div>
+                    <h3>Inclusive Institutions</h3>
+                    <p>Prosperity is only possible when power is widely shared and accountable to citizens.</p>
+                </div>
+                <div class="principle-card fade-in stagger-4">
+                    <div class="principle-icon">🏔️</div>
+                    <h3>Himalayan Stewardship</h3>
+                    <p>Nature is a rights-holder; humans are guardians.</p>
+                </div>
+                <div class="principle-card fade-in stagger-5">
+                    <div class="principle-icon">🗳️</div>
+                    <h3>Deliberative-Direct Democracy</h3>
+                    <p>Citizens set the agenda and hold final power, not elites.</p>
+                </div>
+                <div class="principle-card fade-in stagger-6">
+                    <div class="principle-icon">💻</div>
+                    <h3>Digital Clean-State</h3>
+                    <p>Transparent, efficient, and incorruptible governance powered by e-ID and open data.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="manifesto-section" id="democracy">
+        <div class="container">
+            <div class="manifesto-content">
+                <div class="section-number">02</div>
+                <div>
+                    <h2>Democratic Renewal</h2>
+                    <ul>
+                        <li>Establish a <strong>Citizens' Chamber</strong> (200 randomly selected Nepalis, stratified by diversity) to review major laws, constitutional amendments, and set deliberative agendas.</li>
+                        <li><strong>National initiative & referendum</strong> with a double majority (people + provinces), but only after public deliberation.</li>
+                        <li><strong>Open-list proportional representation</strong> so voters choose people, not just party ranks.</li>
+                        <li><strong>Campaign finance sunlight:</strong> Real-time dashboards of all donations and spending.</li>
+                        <li>Pilot <strong>Quadratic Voting</strong> and <strong>liquid democracy</strong> tools inside party structures and participatory budgeting.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="manifesto-section">
+        <div class="container">
+            <div class="manifesto-content">
+                <div class="section-number">03</div>
+                <div>
+                    <h2>Clean Governance</h2>
+                    <ul>
+                        <li>Transform the <strong>CIAA</strong> into a truly independent body with citizen oversight, non-renewable terms, and open contracting by default.</li>
+                        <li>All tenders, contracts, and government budgets must be published in machine-readable formats.</li>
+                        <li><strong>Digital audit logs:</strong> every time an official accesses your record, you can see it. Misuse = automatic penalties.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="manifesto-section" id="rights">
+        <div class="container">
+            <div class="manifesto-content">
+                <div class="section-number">04</div>
+                <div>
+                    <h2>Social Freedoms & Rights</h2>
+                    
+                    <h3>Free Speech & Protest</h3>
+                    <ul>
+                        <li>Abolish criminal defamation and "blasphemy/insulting religion" laws.</li>
+                        <li>Only true incitement to violence/discrimination (Rabat threshold) is criminal.</li>
+                        <li>End blanket bans on platforms—only judge-ordered, URL-specific takedowns, published publicly.</li>
+                    </ul>
+
+                    <h3>Religion & Secularism</h3>
+                    <ul>
+                        <li>Amend "secularism" definition to mean strict state neutrality—no faith gets privilege.</li>
+                        <li>Decriminalize voluntary conversion; criminalize only coercion/fraud.</li>
+                        <li>Religious trusts must publish audited accounts.</li>
+                    </ul>
+
+                    <h3>Gender & LGBTQIA+ Equality</h3>
+                    <ul>
+                        <li>Enshrine <strong>marriage equality</strong> constitutionally: gender-neutral civil marriage, equal adoption, inheritance, pensions.</li>
+                        <li>Protect self-determined gender identity; ban non-consensual intersex surgeries.</li>
+                        <li>Enforce anti-discrimination in work, housing, and education.</li>
+                    </ul>
+
+                    <h3>Caste & Inclusion</h3>
+                    <ul>
+                        <li>Keep <strong>reservation (affirmative action)</strong> but make it dynamic: quotas recalculated every 5 years based on a Disadvantage Index.</li>
+                        <li>Mandatory diversity reporting in public contracts and hiring.</li>
+                        <li>Supercharge enforcement with fast-track courts and victim funds.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="manifesto-section" id="economy">
+        <div class="container">
+            <div class="manifesto-content">
+                <div class="section-number">05</div>
+                <div>
+                    <h2>Economy & Livelihood</h2>
+                    <ul>
+                        <li><strong>Green economy drive:</strong> Hydropower value-chains, eco-tourism, agro-processing, and IT exports.</li>
+                        <li><strong>Participatory budgeting:</strong> 10% of all municipal budgets allocated directly by citizens each year.</li>
+                        <li><strong>Universal digital infrastructure:</strong> free e-ID, internet access zones, digital literacy by grade 6.</li>
+                        <li><strong>Startup ecosystem:</strong> government-backed venture funds, incubation hubs in each province.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="manifesto-section" id="future">
+        <div class="container">
+            <div class="manifesto-content">
+                <div class="section-number">06</div>
+                <div>
+                    <h2>Nature & Future Generations</h2>
+                    <ul>
+                        <li>Constitutionally recognize <strong>Rights of Nature</strong>—rivers, forests, and mountains have standing in court.</li>
+                        <li>Establish a <strong>Council for Future Generations</strong> to veto unsustainable mega-projects unless overruled by supermajority.</li>
+                        <li>Climate adaptation fund from hydropower revenues.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="manifesto-section">
+        <div class="container">
+            <div class="manifesto-content">
+                <div class="section-number">10</div>
+                <div>
+                    <h2>The New Social Contract</h2>
+                    <h3>Every Nepali Guaranteed:</h3>
+                    <ul>
+                        <li>Health & education access</li>
+                        <li>Digital identity & connectivity</li>
+                        <li>Freedom of speech, conscience, and protest</li>
+                        <li>Inclusion & dignity regardless of caste, gender, faith, or region</li>
+                        <li>A government that is open, auditable, and accountable</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="final-cta">
+        <div class="container">
+            <h2>"Hamro Nepal, Hamro Nirnay"</h2>
+            <p>Our Nepal, Our Decision</p>
+            <a href="#principles" class="cta-button">Join the Movement</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Jan Ganatantra 2.0 Movement. A radical blueprint for Nepal's democratic future.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.backgroundColor = 'rgba(220, 38, 38, 0.95)';
+            } else {
+                header.style.backgroundColor = 'rgba(220, 38, 38, 1)';
+            }
+        });
+    </script>
+</body>
+</html>
