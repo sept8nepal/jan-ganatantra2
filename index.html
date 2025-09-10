@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>जन गणतन्त्र २.० - हाम्रो नेपाल, हाम्रो निर्णय</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .language-switch {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .language-switch:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Emergency Notification Banner */
+        .emergency-notification {
+            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            position: fixed;
+            top: 70px;
+            width: 100%;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            border-bottom: 3px solid #dc2626;
+        }
+
+        .emergency-notification .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .emergency-icon {
+            font-size: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .emergency-text {
+            font-weight: 600;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .emergency-text strong {
+            font-weight: 800;
+            text-decoration: underline;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #dc2626 100%);
+            color: white;
+            padding: 200px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .hero-tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            background: white;
+            color: #dc2626;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        /* Principles Section */
+        .principles {
+            padding: 80px 0;
+            background: #f8fafc;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: #1e40af;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .principle-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .principle-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .principle-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .principle-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1e40af;
+        }
+
+        /* Manifesto Sections */
+        .manifesto-section {
+            padding: 60px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .manifesto-section:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .manifesto-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .section-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: #dc2626;
+            opacity: 0.3;
+        }
+
+        .manifesto-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1e40af;
+        }
+
+        .manifesto-section h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.5rem;
+            color: #dc2626;
+        }
+
+        .manifesto-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .manifesto-section li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .manifesto-section li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        /* Call to Action */
+        .final-cta {
+            background: linear-gradient(135deg, #1e40af 0%, #dc2626 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .final-cta p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .manifesto-content {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .section-number {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            .final-cta h2 {
+                font-size: 2rem;
+            }
+
+            .emergency-notification .container {
+                flex-direction: column;
+                gap: 10px;
+                padding: 0 15px;
+            }
+
+            .emergency-text {
+                font-size: 0.9rem;
+                text-align: center;
+            }
+
+            .hero {
+                padding: 220px 0 80px;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        .stagger-6 { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">जन गणतन्त्र २.०</a>
+            <ul class="nav-links">
+                <li><a href="#principles">सिद्धान्तहरू</a></li>
+                <li><a href="#democracy">लोकतन्त्र</a></li>
+                <li><a href="#rights">अधिकार</a></li>
+                <li><a href="#economy">अर्थतन्त्र</a></li>
+                <li><a href="#future">भविष्य</a></li>
+                <li><a href="index-en.html" class="language-switch">English</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Emergency Notification Banner -->
+    <div class="emergency-notification">
+        <div class="container">
+            <div class="emergency-icon">⚠️</div>
+            <div class="emergency-text">
+                <strong>जरुरी:</strong> हामी सेप्टेम्बर ९ मा भएको अराजकता र हिंसा प्रति घोर निन्दा व्यक्त गर्दछौं। हामी सबै सुरक्षा बलहरूलाई तुरुन्त पुनः परिचालन गर्न र सबै नागरिकहरूको सुरक्षा र सुरक्षितताको लागि व्यवस्था पुनर्स्थापना गर्न आग्रह गर्दछौं। अराजकतामा लोकतन्त्र फस्टाउन सक्दैन—हामी हाम्रा संवैधानिक अधिकारहरूको रक्षा र कानूनको शासन कायम राख्न तुरुन्त कारबाहीको माग गर्दछौं।
+            </div>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="fade-in">जन गणतन्त्र २.०</h1>
+                <div class="hero-subtitle fade-in stagger-1">विचार-विमर्शात्मक-प्रत्यक्ष गणतन्त्र</div>
+                <div class="hero-tagline fade-in stagger-2">न्यायपूर्ण, स्वतन्त्र र सक्षम नेपालको लागि एक क्रान्तिकारी नक्शा</div>
+                <a href="#principles" class="cta-button fade-in stagger-3">हाम्रो नेपाल, हाम्रो निर्णय</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="principles" id="principles">
+        <div class="container">
+            <h2 class="section-title">मुख्य सिद्धान्तहरू</h2>
+            <div class="principles-grid">
+                <div class="principle-card fade-in stagger-1">
+                    <div class="principle-icon">⚖️</div>
+                    <h3>अधिपत्यविहीन स्वतन्त्रता</h3>
+                    <p>कुनै पनि व्यक्ति, जात, व्यापार, दल, वा विदेशी शक्तिले अर्कोलाई मनमानी रूपमा अधिपत्य गर्न सक्दैन।</p>
+                </div>
+                <div class="principle-card fade-in stagger-2">
+                    <div class="principle-icon">🎯</div>
+                    <h3>सक्षमताको रूपमा न्याय</h3>
+                    <p>हरेक नीतिलाई यस आधारमा मूल्याङ्कन गरिन्छ कि यसले नेपालीहरूको वास्तविक स्वतन्त्रताहरू—स्वास्थ्य, शिक्षा, जीविकोपार्जन, जोडाइ, गरिमा—विस्तार गर्छ कि गर्दैन।</p>
+                </div>
+                <div class="principle-card fade-in stagger-3">
+                    <div class="principle-icon">🏛️</div>
+                    <h3>समावेशी संस्थाहरू</h3>
+                    <p>समृद्धि तब मात्र सम्भव छ जब शक्ति व्यापक रूपमा साझा हुन्छ र नागरिकहरूको प्रति जवाफदेही हुन्छ।</p>
+                </div>
+                <div class="principle-card fade-in stagger-4">
+                    <div class="principle-icon">🏔️</div>
+                    <h3>हिमाली संरक्षकत्व</h3>
+                    <p>प्रकृति अधिकारधारक हो; मानिसहरू संरक्षक हुन्।</p>
+                </div>
+                <div class="principle-card fade-in stagger-5">
+                    <div class="principle-icon">🗳️</div>
+                    <h3>विचार-विमर्शात्मक-प्रत्यक्ष लोकतन्त्र</h3>
+                    <p>नागरिकहरूले एजेन्डा तय गर्छन् र अन्तिम शक्ति राख्छन्, अभिजात्यहरू होइन।</p>
+                </div>
+                <div class="principle-card fade-in stagger-6">
+                    <div class="principle-icon">💻</div>
+                    <h3>डिजिटल स्वच्छ-अवस्था</h3>
+                    <p>पारदर्शी, कुशल र भ्रष्टाचारविहीन शासन e-ID र खुला डेटाद्वारा शक्ति प्राप्त।</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="manifesto-section" id="democracy">
+        <div class="container">
+            <div class="manifesto-content">
+                <div class="section-number">०२</div>
+                <div>
+                    <h2>लोकतान्त्रिक नवीकरण</h2>
+                    <ul>
+                        <li><strong>नागरिक सभा</strong> स्थापना गर्नुहोस् (२०० जना यादृच्छिक रूपमा छनोट भएका नेपालीहरू, विविधताको आधारमा स्तरीकृत) मुख्य कानूनहरू, संवैधानिक संशोधनहरू समीक्षा गर्न र विचार-विमर्शात्मक एजेन्डा तय गर्न।</li>
+                        <li><strong>राष्ट्रिय पहल र जनमत संग्रह</strong> दोहोरो बहुमत (जनता + प्रदेशहरू) सहित, तर सार्वजनिक विचार-विमर्श पछि मात्र।</li>
+                        <li><strong>खुला सूची आनुपातिक प्रतिनिधित्व</strong> ताकि मतदाताहरूले व्यक्तिहरू छनोट गर्छन्, केवल दलको रैंक होइन।</li>
+                        <li><strong>अभियान वित्त सूर्यप्रकाश:</strong> सबै दान र खर्चको वास्तविक समय ड्यासबोर्ड।</li>
+                        <li><strong>द्विघात मतदान</strong> र <strong>तरल लोकतन्त्र</strong> उपकरणहरू दल संरचनाहरू र सहभागी बजेटिङ भित्र पायलट गर्नुहोस्।</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="manifesto-section">
+        <div class="container">
+            <div class="manifesto-content">
+                <div class="section-number">०३</div>
+                <div>
+                    <h2>स्वच्छ शासन</h2>
+                    <ul>
+                        <li><strong>CIAA</strong> लाई नागरिक निगरानी, नवीकरण नहुने कार्यकाल, र डिफल्ट रूपमा खुला ठेकेदारी सहित साँच्चै स्वतन्त्र निकायमा रूपान्तरण गर्नुहोस्।</li>
+                        <li>सबै टेन्डरहरू, ठेकेदारीहरू, र सरकारी बजेटहरू मेसिन-पढ्न योग्य ढाँचामा प्रकाशित हुनुपर्छ।</li>
+                        <li><strong>डिजिटल लेखा परीक्षा लगहरू:</strong> हरेक पटक अधिकारीले तपाईंको रेकर्ड पहुँच गर्छ, तपाईंले यसलाई देख्न सक्नुहुन्छ। दुरुपयोग = स्वचालित जरिवाना।</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="manifesto-section" id="rights">
+        <div class="container">
+            <div class="manifesto-content">
+                <div class="section-number">०४</div>
+                <div>
+                    <h2>सामाजिक स्वतन्त्रता र अधिकारहरू</h2>
+                    
+                    <h3>स्वतन्त्र भाषण र प्रदर्शन</h3>
+                    <ul>
+                        <li>आपराधिक मानहानि र "धर्मनिन्दा/धर्म अपमान" कानूनहरू उन्मूलन गर्नुहोस्।</li>
+                        <li>वास्तविक हिंसा/भेदभाव उक्साउने (रबात सीमा) मात्र आपराधिक हो।</li>
+                        <li>प्लेटफर्महरूमा ब्ल्याङ्केट प्रतिबन्ध समाप्त गर्नुहोस्—केवल न्यायाधीश आदेशित, URL-विशिष्ट टेकडाउनहरू, सार्वजनिक रूपमा प्रकाशित।</li>
+                    </ul>
+
+                    <h3>धर्म र धर्मनिरपेक्षता</h3>
+                    <ul>
+                        <li>"धर्मनिरपेक्षता" परिभाषालाई कडा राज्य तटस्थता अर्थमा संशोधन गर्नुहोस्—कुनै पनि धर्मलाई विशेषाधिकार मिल्दैन।</li>
+                        <li>स्वैच्छिक धर्मान्तरणलाई अपराधमुक्त बनाउनुहोस्; केवल जबरजस्ती/धोखाधडी मात्र अपराधिक बनाउनुहोस्।</li>
+                        <li>धार्मिक ट्रस्टहरूले लेखा परीक्षित खाताहरू प्रकाशित गर्नुपर्छ।</li>
+                    </ul>
+
+                    <h3>लिङ्ग र LGBTQIA+ समानता</h3>
+                    <ul>
+                        <li><strong>विवाह समानता</strong> संवैधानिक रूपमा स्थापना गर्नुहोस्: लिङ्ग-तटस्थ नागरिक विवाह, समान दत्तक, उत्तराधिकार, पेन्सन।</li>
+                        <li>आत्म-निर्धारित लिङ्ग पहिचानको रक्षा गर्नुहोस्; गैर-सहमतिक इन्टरसेक्स सर्जरीहरू प्रतिबन्ध लगाउनुहोस्।</li>
+                        <li>काम, आवास, र शिक्षामा भेदभाव विरोधी कार्यान्वयन गर्नुहोस्।</li>
+                    </ul>
+
+                    <h3>जात र समावेश</h3>
+                    <ul>
+                        <li><strong>आरक्षण (सकारात्मक कार्य)</strong> राख्नुहोस् तर यसलाई गतिशील बनाउनुहोस्: हरेक ५ वर्षमा एक पटक Disadvantage Index आधारमा कोटाहरू पुनर्गणना।</li>
+                        <li>सार्वजनिक ठेकेदारी र भर्तीमा अनिवार्य विविधता रिपोर्टिङ।</li>
+                        <li>द्रुत-ट्र्याक अदालत र पीडित कोषहरू सहित कार्यान्वयनलाई सुपरचार्ज गर्नुहोस्।</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="manifesto-section" id="economy">
+        <div class="container">
+            <div class="manifesto-content">
+                <div class="section-number">०५</div>
+                <div>
+                    <h2>अर्थतन्त्र र जीविकोपार्जन</h2>
+                    <ul>
+                        <li><strong>हरियो अर्थतन्त्र ड्राइभ:</strong> जलविद्युत मूल्य-श्रृंखला, इको-पर्यटन, कृषि-प्रशोधन, र IT निर्यात।</li>
+                        <li><strong>सहभागी बजेटिङ:</strong> सबै नगरपालिका बजेटको १०% प्रत्यक्ष रूपमा नागरिकहरूद्वारा हरेक वर्ष आवंटन।</li>
+                        <li><strong>सार्वभौमिक डिजिटल अवस्थापना:</strong> निःशुल्क e-ID, इन्टरनेट पहुँच क्षेत्रहरू, कक्षा ६ सम्म डिजिटल साक्षरता।</li>
+                        <li><strong>स्टार्टअप पारिस्थितिकी तन्त्र:</strong> सरकारी समर्थित भेन्चर कोषहरू, प्रत्येक प्रदेशमा इन्क्युबेसन हबहरू।</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="manifesto-section" id="future">
+        <div class="container">
+            <div class="manifesto-content">
+                <div class="section-number">०६</div>
+                <div>
+                    <h2>प्रकृति र भविष्यका पुस्ताहरू</h2>
+                    <ul>
+                        <li>संवैधानिक रूपमा <strong>प्रकृतिको अधिकारहरू</strong> मान्यता दिनुहोस्—नदीहरू, जंगलहरू, र पहाडहरू अदालतमा खडा हुन्छन्।</li>
+                        <li><strong>भविष्यका पुस्ताहरूको लागि परिषद्</strong> स्थापना गर्नुहोस् असतत मेगा-परियोजनाहरूमा वीटो गर्न, जबसम्म सुपरमेजोरिटीद्वारा उल्ट्याइएको छैन।</li>
+                        <li>जलविद्युत राजस्वबाट जलवायु अनुकूलन कोष।</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="manifesto-section">
+        <div class="container">
+            <div class="manifesto-content">
+                <div class="section-number">१०</div>
+                <div>
+                    <h2>नयाँ सामाजिक सम्झौता</h2>
+                    <h3>प्रत्येक नेपालीलाई ग्यारेन्टी:</h3>
+                    <ul>
+                        <li>स्वास्थ्य र शिक्षा पहुँच</li>
+                        <li>डिजिटल पहिचान र जोडाइ</li>
+                        <li>भाषण, विवेक, र प्रदर्शनको स्वतन्त्रता</li>
+                        <li>जात, लिङ्ग, धर्म, वा क्षेत्रको परवाह नगरी समावेश र गरिमा</li>
+                        <li>खुला, लेखा परीक्षण योग्य, र जवाफदेही सरकार</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="final-cta">
+        <div class="container">
+            <h2>"हाम्रो नेपाल, हाम्रो निर्णय"</h2>
+            <p>हाम्रो नेपाल, हाम्रो निर्णय</p>
+            <a href="#principles" class="cta-button">आन्दोलनमा सामेल हुनुहोस्</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; २०२५ जन गणतन्त्र २.० आन्दोलन। नेपालको लोकतान्त्रिक भविष्यको लागि एक क्रान्तिकारी नक्शा।</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.backgroundColor = 'rgba(220, 38, 38, 0.95)';
+            } else {
+                header.style.backgroundColor = 'rgba(220, 38, 38, 1)';
+            }
+        });
+    </script>
+</body>
+</html>
